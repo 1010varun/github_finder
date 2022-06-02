@@ -1,1 +1,21 @@
-const s=function(){const r=document.createElement("link").relList;if(r&&r.supports&&r.supports("modulepreload"))return;for(const e of document.querySelectorAll('link[rel="modulepreload"]'))o(e);new MutationObserver(e=>{for(const t of e)if(t.type==="childList")for(const i of t.addedNodes)i.tagName==="LINK"&&i.rel==="modulepreload"&&o(i)}).observe(document,{childList:!0,subtree:!0});function n(e){const t={};return e.integrity&&(t.integrity=e.integrity),e.referrerpolicy&&(t.referrerPolicy=e.referrerpolicy),e.crossorigin==="use-credentials"?t.credentials="include":e.crossorigin==="anonymous"?t.credentials="omit":t.credentials="same-origin",t}function o(e){if(e.ep)return;e.ep=!0;const t=n(e);fetch(e.href,t)}};s();console.log("github user finder");let u=document.getElementById("search_btn");u.addEventListener("click",c);function c(){let l=document.getElementById("user_name").value,r="https://api.github.com/users/"+l;console.log(r),fetch(r).then(function(n){return n.json()}).then(function(n){let o=n.avatar_url,e=n.html_url;document.getElementById("username").innerHTML="user found : click on image to see github",document.getElementById("user_image").src=o,document.getElementById("link").href=e})}
+console.log("github user finder");
+
+let search_btn = document.getElementById("search_btn");
+search_btn.addEventListener("click",finder);
+
+function finder(){
+    let user_name = document.getElementById("user_name").value;
+    let url = "https://api.github.com/users/" + user_name;
+    console.log(url);
+    fetch(url).then(function(response){
+        return response.json();
+    }).then(function(data){
+        let user_avatar = data.avatar_url;
+        let user = data.html_url;
+        document.getElementById("username").innerHTML = "User Found : Click on Image to see Github"
+        document.getElementById("user_image").src = user_avatar;
+        document.getElementById("link").href = user;
+    })
+}
+
+
